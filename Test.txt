@@ -1,0 +1,4 @@
+https://localhost:44340/TestDB
+https://localhost:44340/TestImages
+https://localhost:44340/DebugLogin
+https://localhost:44340/FixAuth

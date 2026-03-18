@@ -1,0 +1,514 @@
+﻿<%@ Master Language="C#" AutoEventWireup="True" Inherits="MasterPage" Codebehind="MasterPage.master.cs" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="animate-container">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%: Page.Title %> - 环球讯报</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    
+    <!-- 自定义CSS -->
+    <link href="Styles/Site.css" rel="stylesheet" />
+
+    <!-- 宇宙背景CSS -->
+    <link href="Styles/UniverseBackground.css" rel="stylesheet" />
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <!-- 添加登录状态刷新脚本 -->
+    <script src="Scripts/refreshLogin.js"></script>
+    
+    <!-- 添加meta标签防止缓存 -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+</head>
+
+    <script>
+        // 生成随机星星
+        function createStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            if (!starsContainer) return;
+
+            // 清空现有星星
+            starsContainer.innerHTML = '';
+
+            // 创建200颗星星
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                const size = Math.random() * 3 + 1;
+                const duration = Math.random() * 3 + 2;
+
+                star.className = 'star';
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.opacity = Math.random() * 0.7 + 0.3;
+                star.style.setProperty('--duration', `${duration}s`);
+                star.style.animationDelay = `${Math.random() * 5}s`;
+
+                // 根据大小分类
+                if (size < 1.5) {
+                    star.classList.add('small');
+                } else if (size < 2.5) {
+                    star.classList.add('medium');
+                } else {
+                    star.classList.add('large');
+                }
+
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // 生成流星
+        function createMeteors() {
+            const universeHeader = document.querySelector('.universe-header');
+            if (!universeHeader) return;
+
+            // 每隔10秒创建一个流星
+            setInterval(() => {
+                const meteor = document.createElement('div');
+                meteor.className = 'meteor';
+                meteor.style.left = `${Math.random() * 100}%`;
+                meteor.style.top = `${Math.random() * 50}%`;
+                meteor.style.animationDuration = `${Math.random() * 3 + 3}s`;
+                meteor.style.animationDelay = `${Math.random() * 2}s`;
+
+                universeHeader.appendChild(meteor);
+
+                // 流星动画结束后移除元素
+                setTimeout(() => {
+                    if (meteor.parentNode) {
+                        meteor.parentNode.removeChild(meteor);
+                    }
+                }, 6000);
+            }, 10000);
+        }
+
+        // 生成脉冲星
+        function createPulseStars() {
+            const universeHeader = document.querySelector('.universe-header');
+            if (!universeHeader) return;
+
+            for (let i = 0; i < 5; i++) {
+                const pulseStar = document.createElement('div');
+                pulseStar.className = 'pulse-star';
+                pulseStar.style.left = `${Math.random() * 100}%`;
+                pulseStar.style.top = `${Math.random() * 100}%`;
+                pulseStar.style.width = `${Math.random() * 6 + 2}px`;
+                pulseStar.style.height = pulseStar.style.width;
+                pulseStar.style.animationDuration = `${Math.random() * 5 + 3}s`;
+                pulseStar.style.animationDelay = `${Math.random() * 10}s`;
+
+                universeHeader.appendChild(pulseStar);
+            }
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            createStars();
+            createMeteors();
+            createPulseStars();
+
+            // 窗口大小改变时重新生成星星
+            window.addEventListener('resize', function () {
+                createStars();
+            });
+        });
+    </script>
+
+<body>
+    <form id="form1" runat="server">
+
+            <!-- 添加ScriptManager -->
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
+        <Scripts>
+            <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+            <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+        </Scripts>
+    </asp:ScriptManager>
+
+        <!-- 页眉 -->
+    <header class="universe-header py-3 shadow">
+        <!-- 宇宙背景元素 -->
+        <div class="stars" id="starsContainer"></div>
+        <div class="nebulae" id="nebulaeContainer"></div>
+        <div class="galaxy"></div>
+        <div class="galaxy"></div>
+        <div class="nebula"></div>
+        <div class="planet small"></div>
+        <div class="planet large"></div>
+        <div class="cosmic-dust"></div>
+        <div class="pulse-star" style="top: 30%; left: 20%; width: 6px; height: 6px;"></div>
+        <div class="pulse-star" style="top: 70%; left: 80%; width: 4px; height: 4px;"></div>
+
+         <div class="header-content" style="background: transparent; position: relative; z-index: 10;">
+            <div class="container" style="background: transparent;">
+                <div class="row align-items-center" style="background: transparent;">
+                    <div class="col-md-6">
+                        <h1>
+                            <a href="Default.aspx" class="text-white text-decoration-none glow-text">
+                                <i class="fas fa-newspaper me-2"></i>环球讯报
+                            </a>
+                        </h1>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <div id="loginStatus" class="animate-on-load">
+                            <asp:Panel ID="pnlNotLoggedIn" runat="server">
+                                <a href="/Account/Login.aspx" class="btn btn-outline-light btn-sm me-2">
+                                    <i class="fas fa-sign-in-alt me-1"></i>登录
+                                </a>
+                                <a href="/Account/Register.aspx" class="btn btn-light btn-sm">
+                                    <i class="fas fa-user-plus me-1"></i>注册
+                                </a>
+                            </asp:Panel>
+        
+                            <asp:Panel ID="pnlLoggedIn" runat="server" Visible="false">
+                                <span class="me-3 text-white " id="loggedInUser" runat="server"></span>
+                                <asp:LinkButton ID="btnLogout" runat="server" 
+                                    CssClass="btn btn-outline-light btn-sm" 
+                                    OnClick="btnLogout_Click">
+                                    <i class="fas fa-sign-out-alt me-1"></i>退出
+                                </asp:LinkButton>
+                            </asp:Panel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+        <!-- 导航栏 -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm py-0">
+            <div class="container" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <asp:HyperLink ID="hlHome" runat="server" NavigateUrl="~/Default.aspx" 
+                                CssClass="nav-link" Text='<i class="fas fa-home me-1"></i>首页'>
+                            </asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="hlPolitics" runat="server" NavigateUrl="~/NewsList.aspx?category=政治"
+                                CssClass="nav-link animate-on-load delay-2">
+                                <i class="fas fa-landmark me-1"></i>政治
+                            </asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="hlEconomics" runat="server" NavigateUrl="~/NewsList.aspx?category=经济"
+                                CssClass="nav-link animate-on-load delay-3">
+                                <i class="fas fa-chart-line me-1"></i>经济
+                            </asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="hlTechnology" runat="server" NavigateUrl="~/NewsList.aspx?category=科技"
+                                CssClass="nav-link animate-on-load delay-4">
+                                <i class="fas fa-microchip me-1"></i>科技
+                            </asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="hlSports" runat="server" NavigateUrl="~/NewsList.aspx?category=体育"
+                                CssClass="nav-link animate-on-load delay-5">
+                                <i class="fas fa-futbol me-1"></i>体育
+                            </asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="hlEntertainment" runat="server" NavigateUrl="~/NewsList.aspx?category=娱乐"
+                                CssClass="nav-link animate-on-load">
+                                <i class="fas fa-film me-1"></i>娱乐
+                            </asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="hlAbout" runat="server" NavigateUrl="~/About.aspx"
+                                CssClass="nav-link" Text="关于我们"></asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="hlContact" runat="server" NavigateUrl="~/Contact.aspx"
+                                CssClass="nav-link" Text="联系我们"></asp:HyperLink>
+                        </li>
+                        <!-- 后台管理菜单（动态显示） -->
+                        <li class="nav-item">
+                            <asp:HyperLink ID="hlAdmin" runat="server" NavigateUrl="~/Admin/Default.aspx" 
+                                CssClass="nav-link text-danger animate-on-load" Visible="false">
+                                <i class="fas fa-cog me-1"></i>后台管理
+                            </asp:HyperLink>
+                        </li>
+                    </ul>
+                    
+                    <!-- 搜索框 -->
+                    <div class="d-flex animate-on-load">
+                        <div class="input-group">
+                            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control me-2" 
+                                placeholder="搜索新闻..." Width="200"></asp:TextBox>
+                            <asp:Button ID="btnSearch" runat="server" Text="搜索" 
+                                CssClass="btn btn-outline-primary" OnClick="btnSearch_Click" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 内容区域 -->
+        <main class="page-transition-container">
+            <div class="container mt-4 mb-5 animate-container">
+                <div class="current-page">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="bg-dark text-white py-4 mt-5">
+            <div class="container bg-transparent">
+                <div class="row">
+                    <div class="col-md-6 mb-4 mb-md-0">
+                        <h5><i class="fas fa-newspaper me-2"></i>环球讯报</h5>
+                        <p class="mb-0">© 2025 失控工作室 版权所有</p>
+                        <p class="small">动态网站设计与开发课程设计项目 - ASP.NET Web Forms</p>
+                        <p class="small mb-0 text-muted">提供最新、最全面的新闻资讯服务</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <p><i class="fas fa-envelope me-2"></i>m13720071615@163.com</p>
+                        <p><i class="fas fa-map-marker-alt me-2"></i>北京市丰台区</p>
+                        <div class="mt-3">
+                            <a href="#" class="text-white me-3">
+                                <i class="fab fa-weixin fa-lg"></i>
+                            </a>
+                            <a href="#" class="text-white me-3">
+                                <i class="fab fa-weibo fa-lg"></i>
+                            </a>
+                            <a href="#" class="text-white">
+                                <i class="fab fa-qq fa-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </form>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- 刷新登录状态的脚本 -->
+    <script>
+        // 页面加载完成后强制刷新一次登录状态
+        document.addEventListener('DOMContentLoaded', function () {
+            // 添加时间戳防止缓存
+            var links = document.querySelectorAll('a[href*=".aspx"]');
+            links.forEach(function (link) {
+                var href = link.getAttribute('href');
+                if (href && href.indexOf('?') === -1 && !href.includes('#') &&
+                    !href.includes('javascript:')) {
+                    link.setAttribute('href', href + '?t=' + new Date().getTime());
+                }
+            });
+        });
+
+        // 处理退出按钮点击
+        function confirmLogout() {
+            if (confirm('确定要退出登录吗？')) {
+                // 创建一个隐藏的表单提交
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = 'Account/Logout.aspx';
+
+                // 添加一个随机参数防止缓存
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 't';
+                input.value = new Date().getTime();
+                form.appendChild(input);
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+            return false;
+        }
+    </script>
+    
+    <asp:ContentPlaceHolder ID="Scripts" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <!-- 页面加载动画 -->
+<div id="pageLoader" class="page-loading">
+    <div class="loader"></div>
+</div>
+
+<script>
+    // 页面加载动画
+    document.addEventListener('DOMContentLoaded', function () {
+        const loader = document.getElementById('pageLoader');
+
+        // 页面加载完成后隐藏加载动画
+        setTimeout(function () {
+            loader.classList.add('hidden');
+
+            // 完全移除加载动画
+            setTimeout(function () {
+                loader.style.display = 'none';
+
+                // 为内容添加动画
+                document.querySelectorAll('.animate-on-load').forEach((element, index) => {
+                    element.style.animationDelay = `${index * 0.1}s`;
+                    element.classList.add('fade-in');
+                });
+            }, 500);
+        }, 800);
+
+        // 为所有链接添加点击动画
+        document.querySelectorAll('a, .btn').forEach(link => {
+            link.addEventListener('click', function (e) {
+                // 排除外部链接和特殊链接
+                if (this.href && !this.target && this.href.indexOf('#') !== 0 &&
+                    !this.href.includes('javascript:') && !this.classList.contains('no-animation')) {
+
+                    // 显示加载动画
+                    loader.classList.remove('hidden');
+                    loader.style.display = 'flex';
+
+                    // 添加页面离开动画
+                    document.querySelector('main').style.animation = 'pageExit 0.3s ease forwards';
+                }
+            });
+        });
+
+        // 图片懒加载动画
+        const images = document.querySelectorAll('img:not([src=""])');
+        images.forEach(img => {
+            // 如果图片还没有加载，显示加载占位符
+            if (!img.complete) {
+                img.classList.add('img-loading');
+
+                img.addEventListener('load', function () {
+                    this.classList.remove('img-loading');
+                    this.classList.add('zoom-in');
+                });
+
+                img.addEventListener('error', function () {
+                    this.classList.remove('img-loading');
+                    this.src = 'Images/default.jpg';
+                });
+            }
+        });
+
+        // 滚动动画
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('fade-in');
+                }
+            });
+        }
+
+        // 初始检查
+        animateOnScroll();
+
+        // 滚动时检查
+        window.addEventListener('scroll', animateOnScroll);
+
+        // 为表单添加动画
+        document.querySelectorAll('input, select, textarea').forEach(input => {
+            input.addEventListener('focus', function () {
+                this.parentElement.classList.add('focused');
+            });
+
+            input.addEventListener('blur', function () {
+                if (this.value === '') {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+
+        // 为导航链接添加点击效果
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function () {
+                // 移除其他链接的活动状态
+                document.querySelectorAll('.nav-link').forEach(l => {
+                    l.classList.remove('active');
+                });
+
+                // 添加当前链接的活动状态
+                this.classList.add('active');
+
+                // 添加点击波纹效果
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.3);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                `;
+
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // 波纹效果动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes pageExit {
+                to {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    });
+
+    // 处理浏览器前进/后退
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+            const loader = document.getElementById('pageLoader');
+            loader.classList.add('hidden');
+
+            setTimeout(function () {
+                loader.style.display = 'none';
+            }, 500);
+        }
+    });
+</script>
+
+    <script src="js/pageTransitions.js"></script>
+
+</body>
+</html>

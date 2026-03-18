@@ -1,0 +1,294 @@
+﻿/* 宇宙动态背景样式 */
+.universe-header {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #0a0a2a 0%, #000011 50%, #000000 100%);
+    min-height: 80px;
+}
+
+/* 星星效果 */
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration) infinite ease-in-out;
+}
+
+    /* 小星星 */
+    .star.small {
+        width: 1px;
+        height: 1px;
+        opacity: 0.7;
+    }
+
+    /* 中等星星 */
+    .star.medium {
+        width: 2px;
+        height: 2px;
+        opacity: 0.9;
+        box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+    }
+
+    /* 大星星 */
+    .star.large {
+        width: 3px;
+        height: 3px;
+        opacity: 1;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 1);
+    }
+
+/* 闪烁动画 */
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* 流星效果 */
+.meteor {
+    position: absolute;
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, white);
+    border-radius: 50%;
+    transform: rotate(-45deg);
+    opacity: 0;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+}
+
+.meteor-1 {
+    top: 20%;
+    left: 10%;
+    animation: meteor 3s linear infinite;
+}
+
+.meteor-2 {
+    top: 40%;
+    left: 20%;
+    animation: meteor 2.5s linear infinite 1s;
+}
+
+.meteor-3 {
+    top: 60%;
+    left: 30%;
+    animation: meteor 4s linear infinite 2s;
+}
+
+@keyframes meteor {
+    0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(300px) translateY(150px);
+        opacity: 0;
+    }
+}
+
+@keyframes meteorShower {
+    0% {
+        opacity: 0;
+        top: -50px;
+        left: -50px;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    20% {
+        opacity: 1;
+        top: calc(100% + 50px);
+        left: calc(100% + 50px);
+    }
+
+    100% {
+        opacity: 0;
+        top: calc(100% + 50px);
+        left: calc(100% + 50px);
+    }
+}
+
+/* 星系漩涡效果 */
+.galaxy {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(100, 50, 255, 0.2) 0%, rgba(50, 20, 150, 0.1) 40%, transparent 70%);
+    filter: blur(40px);
+    animation: rotateGalaxy 120s infinite linear;
+    opacity: 0.6;
+}
+
+    .galaxy:nth-child(2) {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle at 70% 30%, rgba(255, 100, 50, 0.15) 0%, rgba(150, 50, 20, 0.1) 40%, transparent 70%);
+        animation: rotateGalaxyReverse 100s infinite linear;
+        opacity: 0.4;
+    }
+
+@keyframes rotateGalaxy {
+    0% {
+        transform: rotate(0deg) translateX(100px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(100px) rotate(-360deg);
+    }
+}
+
+@keyframes rotateGalaxyReverse {
+    0% {
+        transform: rotate(0deg) translateX(-80px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg) translateX(-80px) rotate(360deg);
+    }
+}
+
+/* 星云效果 */
+.nebula {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(100, 0, 255, 0.2) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 0, 100, 0.15) 0%, transparent 50%), radial-gradient(circle at 50% 80%, rgba(0, 150, 255, 0.1) 0%, transparent 50%);
+    filter: blur(60px);
+    opacity: 0.3;
+    animation: nebulaFloat 3s infinite ease-in-out;
+}
+
+@keyframes nebulaFloat {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(20px, 10px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-10px, -20px) scale(0.9);
+    }
+}
+
+/* 行星效果 */
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 200, 50, 0.8) 0%, rgba(200, 100, 0, 0.6) 50%, rgba(150, 50, 0, 0.4) 100%);
+    box-shadow: 0 0 40px rgba(255, 200, 50, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.5);
+    animation: planetOrbit 40s infinite linear;
+}
+
+    .planet.small {
+        width: 30px;
+        height: 30px;
+        top: 20%;
+        right: 15%;
+    }
+
+    .planet.large {
+        width: 50px;
+        height: 50px;
+        bottom: 20%;
+        left: 10%;
+        background: radial-gradient(circle at 30% 30%, rgba(50, 150, 255, 0.8) 0%, rgba(0, 100, 200, 0.6) 50%, rgba(0, 50, 150, 0.4) 100%);
+        box-shadow: 0 0 60px rgba(50, 150, 255, 0.4), inset 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+@keyframes planetOrbit {
+    0% {
+        transform: rotate(0deg) translateX(80px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(80px) rotate(-360deg);
+    }
+}
+
+/* 宇宙尘埃 */
+.cosmic-dust {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.03) 1px, transparent 1px), radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.02) 1px, transparent 1px), radial-gradient(circle at 50% 60%, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 100px 100px, 150px 150px, 200px 200px;
+    animation: dustMove 200s infinite linear;
+    opacity: 0.5;
+}
+
+@keyframes dustMove {
+    0% {
+        background-position: 0 0, 0 0, 0 0;
+    }
+
+    100% {
+        background-position: 1000px 500px, 1500px 750px, 2000px 1000px;
+    }
+}
+
+/* 脉冲星光 */
+.pulse-star {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* 内容层（确保文字在背景之上） */
+.header-content {
+    position: relative;
+    z-index: 10;
+}
+
+
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .galaxy {
+        width: 150px;
+        height: 150px;
+    }
+
+    .planet {
+        display: none; /* 在小屏幕上隐藏行星 */
+    }
+
+    .meteor {
+        height: 30px;
+    }
+}
+
