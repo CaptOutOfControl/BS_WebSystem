@@ -1,5 +1,7 @@
-网站首页
+## 功能演示
+### 主界面
 <img width="1920" height="3928" alt="9a1f4eaddc42e1a9a929b977c35961c6" src="https://github.com/user-attachments/assets/0e44cda7-c5d9-4f76-a89b-3312f515d884" />
+*图1：网站首页，包含导航栏和最新文章列表*
 新闻详情
 <img width="1920" height="1080" alt="92b3be772ee47fd9c23dd479632c4a73" src="https://github.com/user-attachments/assets/95eaec83-3a09-4972-96f5-461d83383f78" />
 新闻搜索
