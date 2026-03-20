@@ -2,18 +2,31 @@
 ### 主界面
 <img width="1920" height="3928" alt="9a1f4eaddc42e1a9a929b977c35961c6" src="https://github.com/user-attachments/assets/0e44cda7-c5d9-4f76-a89b-3312f515d884" />
 **图1：网站首页** –包含导航栏和最新文章列表
+
 ### 新闻详情
 <img width="1920" height="1080" alt="92b3be772ee47fd9c23dd479632c4a73" src="https://github.com/user-attachments/assets/95eaec83-3a09-4972-96f5-461d83383f78" />
 **图2：新闻详情** –包含正文内容和相关新闻推荐
-新闻搜索
+
+### 新闻搜索
 <img width="1920" height="1080" alt="3c117095481d375f3279509c0b0e3aa9" src="https://github.com/user-attachments/assets/8910a676-9c0e-466a-9fd4-cdee182d3467" />
-账号登录
+**图3：新闻搜索** –搜索关键词，联想相关新闻
+
+### 账号登录
 <img width="1920" height="1080" alt="80d8084b0f7b88a015b2e5c4db02e6a4" src="https://github.com/user-attachments/assets/05f0a06a-0dd3-4b0c-8611-51567fd5f5d4" />
-管理员账号后台管理
+**图4：账号登录** –支持cookies/sessions安全身份凭证（记住我），哈希值盐值加密校验，有效防止sql注入与彩虹表攻击等
+
+### 管理员账号后台管理
 <img width="1920" height="1080" alt="ab0956eef93f6a27738baa50248caf4a" src="https://github.com/user-attachments/assets/966ce475-d1f0-451d-a5b4-35cdb1bd0e20" />
-管理员账号新闻编辑
+**图5：后台管理** –拥有管理员权限的账号在此页面进行后台管理
+
+### 管理员账号新闻编辑
 <img width="1920" height="2927" alt="ef10c2ffeba55e501d7005af3c48a24f" src="https://github.com/user-attachments/assets/5c04b2bc-2eb7-45b9-8c0b-68e2f362ea23" />
-管理员账号后台数据查看
+**图6：新闻编辑** –拥有管理员权限的账号在此页面进行新闻编辑，包括标题、分类、正文、插图、草稿状态均可更改
+
+### 管理员账号后台数据查看
 <img width="1920" height="4498" alt="5f7caba9ef9b4133196376f35a26d0b2" src="https://github.com/user-attachments/assets/1fa58e85-8bbe-4e71-9cdf-fc76ef0f8125" />
-网站介绍
+**图7：后台数据查看** –拥有管理员权限的账号在此页面进行数据查看，支持按时间段筛选，自动绘制图表汇总数据，帮助追踪流量去向
+
+### 网站介绍
 <img width="1920" height="1080" alt="a99533a22b2a23f51303b245b7f8f83b" src="https://github.com/user-attachments/assets/1bd408ba-f011-4357-a816-d19112714924" />
+**图8：网站介绍** –网站简介
